@@ -8,7 +8,7 @@ rl.question('Whats your name?', function(answer){
     console.log(answer + ", hi. Hope you are having a good day!");
     //readline doesnt close. app still running.
 
-    rl.setPrompt(answer + 'hi again! How are you?');
+    rl.setPrompt(answer + ' hi again! How are you?');
     rl.prompt(); //display the prompt
 
     //listen for any new line

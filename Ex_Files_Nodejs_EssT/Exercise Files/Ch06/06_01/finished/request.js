@@ -1,15 +1,18 @@
-var https = require("https");
+var https = require("https"); 
+//https for secured page, depends on which page we want to load
 var fs = require("fs");
 
 var options = {
 	hostname: "en.wikipedia.org",
-	port: 443,
+	port: 443, //default of http is port 80, not always true
 	path: "/wiki/George_Washington",
 	method: "GET"
 };
 
 var req = https.request(options, function(res) {
 
+	//res is a stream
+	
 	var responseBody = "";
 
 	console.log("Response from server started.");

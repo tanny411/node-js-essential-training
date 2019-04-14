@@ -25,10 +25,13 @@ app.use(function(req, res, next) {
 
 app.use(express.static("./public"));
 
+//another mddleware, cors added to all of my api requests
+//now any domain can make a request for our dictionary-api
 app.use(cors());
 
+//set up a get route
 app.get("/dictionary-api", function(req, res) {
-	res.json(skierTerms);
+	res.json(skierTerms);// automatically stringify,set up headers
 });
 
 app.listen(3000);

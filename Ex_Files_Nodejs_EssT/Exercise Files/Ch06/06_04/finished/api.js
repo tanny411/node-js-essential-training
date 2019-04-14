@@ -1,6 +1,10 @@
+//api = a server whose primary purpose is to serve json data
+//any client who can make a http request can communicate with the api
+
 var http = require("http");
 
 var data = require("./data/inventory");
+//we can simply require json files
 
 http.createServer(function(req, res) {
 
@@ -15,8 +19,6 @@ http.createServer(function(req, res) {
 		res.writeHead(404, {"Content-Type": "text/plain"});
 		res.end("Whoops... Data not found");
 	}
-
-	
 
 }).listen(3000);
 

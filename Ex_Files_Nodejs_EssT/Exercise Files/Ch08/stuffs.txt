@@ -1,0 +1,21 @@
+1. first of all we create a package.json file, that contains info about our app. it will keep track of our package dependencies. create it by doing 
+    -- npm init
+    -- name of app, lowercase, no space
+    -- keywords = comma separated list of words to find the package , if we choose to publish it in the npm registry
+
+2. to handle more than just static files, we need express.js
+    -- npm install express --save
+    -- the save flag add express as a dependency to the package.json file
+
+3.  to open up our api to be usuable by other domains
+    -- npm install cors --save
+
+4. in a post method, the request comes as string, to parse as variables, we need
+    -- npm install body-parser --save
+
+5. now suppose we get the app, or publish it, and some one else got it, we cant carry around all the dependencies(node modules folder), so when i get a fresh app, i do 'npm install' and it will take a look at my package.json and install all the required dependencies.
+
+6. to remove a package, npm remove pkg --save
+
+
+--------------x--------------

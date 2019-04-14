@@ -18,6 +18,7 @@ var skierTerms = [
     }
 ];
 
+//already parse everything for us
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -39,6 +40,7 @@ app.post("/dictionary-api", function(req, res) {
     res.json(skierTerms);
 });
 
+//:term is kinda like a variable
 app.delete("/dictionary-api/:term", function(req, res) {
     skierTerms = skierTerms.filter(function(definition) {
         return definition.term.toLowerCase() !== req.params.term.toLowerCase();

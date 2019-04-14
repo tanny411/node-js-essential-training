@@ -1,0 +1,31 @@
+-- www.npmjs.com -- has all community built modules
+
+-- to install any of those
+    -- npm install package-name
+
+-- to list all installed packages
+    -- npm ls
+
+-- to remove any of those
+    -- npm remove package-name
+
+-- we need to install some packs locally
+-- some, we need to install globally
+    -- sudo npm install -g node-dev
+
+-- we can now run our app with node/node-dev
+-- what node-dev does is it auto restarts 
+    the server when we make any changes to the server file.
+
+
+== other installs
+    1. node-dev
+    2. jshint 
+        -- jshint file.js
+    3. httpster
+        -- to create servers (instead of from scratch)
+        -- its a static file server
+        -- httpster -p 3000 -d directory
+        -- if we install it locally, we have to reference the
+            httpster executable:
+            dir/dir/dir/httpster -p 3000 -d directory

@@ -12,7 +12,7 @@ http.createServer(function(req, res) {
 			res.end(html);
 		});
 
-	} else if (req.url.match(/.css$/)) {
+	} else if (req.url.match(/.css$/)) { //regex to check if file ends with css
 
 		var cssPath = path.join(__dirname, 'public', req.url);
 		var fileStream = fs.createReadStream(cssPath, "UTF-8");
@@ -20,11 +20,13 @@ http.createServer(function(req, res) {
 		res.writeHead(200, {"Content-Type": "text/css"});
 
 		fileStream.pipe(res);
+		//pipe a read stream to a writable stream
+		//chunk chunk kore pathabe
 
 	} else if (req.url.match(/.jpg$/)) {
 
 		var imgPath = path.join(__dirname, 'public', req.url);
-		var imgStream = fs.createReadStream(imgPath);
+		var imgStream = fs.createReadStream(imgPath); //binary data
 
 		res.writeHead(200, {"Content-Type": "image/jpeg"});
 

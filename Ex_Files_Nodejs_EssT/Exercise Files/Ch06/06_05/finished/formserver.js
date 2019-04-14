@@ -13,7 +13,9 @@ http.createServer(function(req, res) {
 		req.on("data", function(chunk) {
 			body += chunk;
 		});
-
+		//body=first=aysha&last=kamal&email=aysha.kamal7%40gmail.com
+		//if we needed to use these variables, example for database
+		//we had to parse this string
 		req.on("end", function() {
 
 			res.writeHead(200, {"Content-Type": "text/html"});

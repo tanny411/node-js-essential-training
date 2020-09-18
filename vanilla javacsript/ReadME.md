@@ -1,4 +1,4 @@
-## Javascript
+## Vanilla Javascript
 
 - High level interpreted language, doesn't need a compiler to run through first, as we do in Java or C++.
 - The most popular implementation of ECMAScript specification
@@ -22,11 +22,15 @@
 
 ### OOP
 - Constructor functions
-- Prototypes:
-    - You may not want the functions of the class for all the object instances. So prototypes help add funcitons afterwards.
-    - Or, you may use classes introduced in ES6, that use the keyword `class` and have a `constructor` method. All methods defined inside the class as added as `prototype` to the object. 
+- Prototypes: You may not want the functions of the class for all the object instances. So prototypes help add funcitons afterwards.
+- Class: Or, you may use classes introduced in ES6, that use the keyword `class` and have a `constructor` method. All methods defined inside the class as added as `prototype` to the object. 
 
-
+### DOM
+- Parent of browser is the `window` object, which we don't need to call explicitly. Test this: `console.log(window)`.
+- Recommended to use `querySelector` and `querySelectorAll`. We can use them with array methods.
+- Some of the attributes to tweak would be `.textContent`, `.innerText`, `.innerHTML`, `.style` etc.
+- Event can be mouse click events, hover, mouse out etc. Keyboard inputs such as input.
+- With event we can change dom elements, remove elements, **create** and append to existing dom elements. Toggle classes.
 
 
 

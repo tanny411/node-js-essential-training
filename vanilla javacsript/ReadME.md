@@ -8,6 +8,28 @@
 - Mobile Apps with React Native, Native SCript, Ionic
 - Desktop apps with ElectronJS
 
+## Content
+
+### Basic Programming:
+- Primitive Data types
+- Strings
+- Arrays
+- Object literals
+- Loops
+    - Higher order array methods: forEach, map, filter
+- Functions:
+    - Arrow functions
+
+### OOP
+- Constructor functions
+- Prototypes:
+    - You may not want the functions of the class for all the object instances. So prototypes help add funcitons afterwards.
+    - Or, you may use classes introduced in ES6, that use the keyword `class` and have a `constructor` method. All methods defined inside the class as added as `prototype` to the object. 
+
+
+
+
+
 
 ### Notes:
 - Use live server extension in vscode to view html live.

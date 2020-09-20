@@ -105,3 +105,68 @@ Text shadows with `text-shadow: shadow-x shadow-y blur color` and we can also pu
 	}
 	```
 	For the items, we can use `order:-1` to specify ordering.
+
+#### 4. Bootstrap
+- If you follow the bootstrap guidelines and especially if you are using the grid system, your application will be responsive. It uses the mobile first approach.
+- `getbootstrap.com` download or use the cdn. Mainly gonna use bootstrap.css and bootstrap.js. Also need jquery for bootstrap. Just add the cdn.
+- Include viewport to make the site responsive. From bootstrap examples we can copy the source (open source Ctrl+U).
+- Some classes:
+	- `lead` class to make text more prominent
+	- `mark` to hilight text
+	- `del` to strike text
+	- `text-center` or left, right, justify, nowrap
+	- `text-lowercase` or uppercase, capitalize
+	- `<blockquote> <p></p> </blockquote>` or `<blockquote class="blockquote-reverse"> <p></p> </blockquote>`
+	- `<ul class="list-unstyled"> </ul>` doesnt pertain to nested lists
+	- `<table class="table"></table>` and some more like table-hover, table-striped, table-condensed
+- Forms:
+	- Wrap each form field in a div with class `form-group`.
+	- `form-control` class for inputs.
+	- Theres also `form-inline`.
+- Buttons in getbootstrap.com >> componenets
+	- Buttons in button tag, a tag, submit or button input tags as well
+	- If you put buttons in a div with `btn-group`, they format together, rounded sides etc.
+- We can use icons in span tags. getbootstrap.com >> glyphicons.
+- class `breadcrumb` in lists to create a breadcrumb area at the top of an article
+- pagination => page numbers put at the botton of pages.
+- class `label label-success` etc.
+- Badges, like number of notification/email. `badge` class in span.
+- `ul.list-group` and `ul li.list-group-item` for nice looking list. Use div instead of ul, a tag instead of li to get menu effect, hover properties etc. Can add badges in lists. Content in list groups as well.
+- Panel
+- Well
+- Alerts
+- Progress bar `<div class="progress-bar progress-bar-success progress-bar-striped", style="width:60%">60%</div>`
+- Grid System:
+	- The entire width is divided into 12 columns. we can make each row divided to span several columns that add upto 12. Below is a schematic example. We can add xs. lg etc to specify the behavior of the columns in small or large screen devices.
+		```
+		.container
+			.row
+				.col-md-12
+			.row
+				.col-md-6 col-xs-6
+				.col-md-6 col-xs-6
+		```
+	- Add `col-md-offset-2` to offset 2 columns. For example when you have 2 col-md-4 and you wanna center them.
+	- We can also next rows inside columns. New rows will also be 12 columns, even if inside a col-6.
+- Modals: Schematic example of a modal for quick reference.
+	```
+	<button data-toggle="modal" data-target="#myModal"></button>
+	<div class="modal fade" id="myModal">
+		div.modal-dialog
+			div.modal-content
+				div.header
+					h4.modal-title #myModalLabel
+				div.modal-body
+					text
+				div.modal-footer
+				button.close data-dismiss="modal"
+	</div>
+	```
+- Dropdowns: .dropdown-menu inside .dropdown.
+- Nav Tabs: link `a` tags to .tab-contents with same id.
+- Tooltip: `<button data-toggle="tooltip" data-placement="left" title="The tip">Click me!</button>` and also enable tooltip with jquery `$("[data-toggle='tooltip']").tooltip()`.
+- Similar is popover.
+- Collapse: Kindof like Modal but instead of a separate box, its a part within the page.
+- Accordions: Like vertical tabs, with content on click
+- Carousals are slide slow for like images, with arrows and other controls.
+

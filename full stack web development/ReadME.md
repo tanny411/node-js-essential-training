@@ -208,3 +208,58 @@ Text shadows with `text-shadow: shadow-x shadow-y blur color` and we can also pu
 		- 4: request finished and response is ready
 	- Replace the file with your url.
 	- On chrome you need to use a server like Apache to run this, you don't need server for firefox though. Just open the html from the file.
+
+#### 6. JQuery
+- Jquery has events, effects, DOM manipulation, CSS manipulation.
+- Run codes after body loads.
+	- `$(document).ready(function(){ \\ALL JS HERE });` 
+	- or the short form `$(function(){ \\ALL JS HERE });`.
+- JQuery has events: 
+	- `$(selector).on('someAction', function(){})` 
+	- or `$(selector).someAction(function(){})`.
+- Selector can be *, **this**, any way we choose elements in css. p:first, ul li:first, ul li:first-child, [attr], a[href!='#'], :button, tr:odd etc. [See descriptions and more in docs](https://api.jquery.com/category/selectors/).
+- Call a function when hovering and call another when not hovering.
+	```
+	$('#square').hover(function(){
+			$(this).text('Hovering...');
+		}, function(){
+			$(this).text('');
+		});
+	```
+- To undo some function on event, put reverse funtions inside the original function.
+	```
+	$focus
+		$blur
+	
+	$mousein
+		$mouseout
+	```
+- Some stuff:
+	- Selector like `select option:selected`. For select lists `change` event is used.
+	- `:input` to select all input tags. 
+	- `.select()` to fire when a text is selected.
+	- `$(selector).html('some text')` or text('some text') etc. val('some text') for input types. Can use the same functions to get the text like `$(selector).text()`.
+	- Set attributes `$(selector).attr('class', 'btn')`. Remove attributes with `.removeAttr('class)`.
+	- .append(), .prepend() going to add within the selected element.
+	- .before, .after() are going to put things outside the selected element.
+	- .remove() vs .empty()
+	- .addClass(), .removeClass(), .toggleClass()
+	- .replaceWith()
+	- .unwrap() removes the wrapping element. .wrap() to add a wrapper.
+- Manipulating css: 
+	- `$(selector).css('color', 'pink')`.
+	- `$(selector).css({'color':'pink', 'height':'100'})`.
+- JQuery effects:
+	- .hide(), .show(), .toggle(), .fadeOut(). fadeToggle(4000), slideUp(), slideToggle(), .stop()
+	- `.animate({ //chage some css }, 'fast')`. the 'fast' is optional.
+ 	- To keep animation going when the function fires, in the css part use +=. For example `left: '+=250px'` and it will keep going right on every click.
+	- Use multiple animation calls one after another to achieve some complex animations.
+- Traversing and Filtering:
+	- $(selector).parent() takes immediate parent, .parents() takes all ancestors.
+	- Specify certain parent like .parent('ul')
+	- .parentsUntil('ul')
+	- .children() selects immediate children
+	- .find('p) looks for p in its children
+	- .siblings(), .siblings('p')
+	- .next(), .nextAll(), .nextUntil(), and .prev()
+	- $('p').first() to get the first paragraph. Similarly .last()

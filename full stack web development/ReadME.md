@@ -170,3 +170,41 @@ Text shadows with `text-shadow: shadow-x shadow-y blur color` and we can also pu
 - Accordions: Like vertical tabs, with content on click
 - Carousals are slide slow for like images, with arrows and other controls.
 
+#### 5. Basic JavaScript
+- JS is a scripting language, interpreted (not compiled), untyped and multi-paradigm (both OOP and functional)
+- JS output:
+	- console.log()
+	- window.alert()
+	- document.write() display within script tags of html, shows on screen
+	- innerHTML
+- Array: We can use it as `key-value pairs` too. It's like a python list and dict merged together. Ofcourse more specific type for dicts is js Objects, they are key-value pairs.
+- `const date = new Date()` gives present date. We can use date.getDate(), date.getDay(), date.getFullYear() etc.
+- Events:
+	- Events for buttons: onlick, onmouseover, onmouseout, ondblclick etc.
+	- Events on forms: onsubmit, onblur, onfocus, onkeyup etc.
+	- Better is to use event listeners. `id_elem.addEventListener('submit', submitFunc, false)`.
+	- event.preventDefault() to stop form from submitting.
+	- onload for mainly the body.
+- `div.className` = someclasses
+- AJAX:
+	- Make http requests without refreshing the whole page.
+		```
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function(){
+			if(xhttp.readyState == 4 && xhttp.status == 200){
+				console.log(xhttp.responseText)
+				//JSON.parse(xhttp.responseText) when recieving a json object
+			}
+		}
+		xhttp.open('GET','file.txt', true);
+		xhttp.send();
+		```
+	- This xhttp object has a couple of properties and methods.
+	- `onreadystatechange` stores a function to be called everytime the ready state changes. States are:
+		- 0: request not initialized
+		- 1: server connection established
+		- 2: request recieved
+		- 3: processing request
+		- 4: request finished and response is ready
+	- Replace the file with your url.
+	- On chrome you need to use a server like Apache to run this, you don't need server for firefox though. Just open the html from the file.

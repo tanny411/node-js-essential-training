@@ -1,15 +1,12 @@
-## The Full Stack Web Development Course
+## The Full Stack Web Development Course: Front End
 
-### Contents
-The sections are listed below. Some bits of notes I took are written under each section. Codes for each section is found in the folders.
-
-#### 1. HTML
+### 1. HTML
 - Block level elemenst: Start on a new line, take the whole width.
 - Inline: Start where they are and take only necessary width.
 - Besides `ul`, `li` there is `dd` or description list.
 - After floats, you need to clear it with a div having style `clear:both`
 
-#### 2. HTML5
+### 2. HTML5
 - Semantic tags: header, nav, main, article, aside(sidebar), footer
 - Audio and Video tags, inc/dec volume, play, pause from js etc.
 - HTML5 canvas manipulation using js.
@@ -19,7 +16,7 @@ The sections are listed below. Some bits of notes I took are written under each 
 - Use `contenteditabe=true` and your content will be editable.
 - For gelocation also, check if browser can use it.
 
-#### 3. CSS
+### 3. CSS
 - `p{}`, `div{}`, `p,div{}`, `p#ix{}`, `div ul.myclass{}` just a bunch of combinations
 - margin/padding: top right bottom left OR top&bottom left&right. e.g `padding: 10px 20px`.
 - `.clr{clear:both}` after using floats.
@@ -106,7 +103,7 @@ Text shadows with `text-shadow: shadow-x shadow-y blur color` and we can also pu
 	```
 	For the items, we can use `order:-1` to specify ordering.
 
-#### 4. Bootstrap
+### 4. Bootstrap
 - If you follow the bootstrap guidelines and especially if you are using the grid system, your application will be responsive. It uses the mobile first approach.
 - `getbootstrap.com` download or use the cdn. Mainly gonna use bootstrap.css and bootstrap.js. Also need jquery for bootstrap. Just add the cdn.
 - Include viewport to make the site responsive. From bootstrap examples we can copy the source (open source Ctrl+U).
@@ -170,7 +167,7 @@ Text shadows with `text-shadow: shadow-x shadow-y blur color` and we can also pu
 - Accordions: Like vertical tabs, with content on click
 - Carousals are slide slow for like images, with arrows and other controls.
 
-#### 5. Basic JavaScript
+### 5. Basic JavaScript
 - JS is a scripting language, interpreted (not compiled), untyped and multi-paradigm (both OOP and functional)
 - JS output:
 	- console.log()
@@ -209,7 +206,7 @@ Text shadows with `text-shadow: shadow-x shadow-y blur color` and we can also pu
 	- Replace the file with your url.
 	- On chrome you need to use a server like Apache to run this, you don't need server for firefox though. Just open the html from the file.
 
-#### 6. JQuery
+### 6. JQuery
 - Jquery has events, effects, DOM manipulation, CSS manipulation.
 - Run codes after body loads.
 	- `$(document).ready(function(){ \\ALL JS HERE });` 

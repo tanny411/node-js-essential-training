@@ -67,4 +67,5 @@
 - By default meteor has autopublish which allows any collection to be published anywhere. Run `meteor remove autopublish`. Publish a db from server, subscribe to it from client side.
 - To style with bootstrap use `meteor add twbs:bootstrap`. It will be automatically in effect, we don't have to link to it or anything. 
 
-### 3. 
+### 3. Angular
+- 

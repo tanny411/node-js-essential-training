@@ -1,6 +1,6 @@
 ## The Full Stack Web Development Course: Back End
 
-### Node js
+### 1. Node.js
 - Its Asynchronous and optimized for throughput and scalability. It is event-driven. It is single threaded and supports concurrency via events and callbacks.
 - Install node with `sudo apt install nodejs` and check versions `node -v` and `npm -v`. Run js files from terminal with `node file.js`. Cannot run browser based functions though.
 - `npm install express` installs it in the node_modules folder. `-g` tag installs it globally. Always have a package.json file and used `--save` tag when installing to add stuff to package.json. To create the file call `npm init`. Later on `npm install` with install all required dependencies.
@@ -44,3 +44,27 @@
     - We create a localstrategy of the passport which checks username and password from database. passport uses this localstrategy and performs authentication of user login.
     - For registering, the form values are taken an inserted in db simply.
     - To keep the login information accessible after successful login, we need to serialize, deserialize using passport.
+
+### 2. Meteor.js
+- **Full stack** js framework, for both front and back end. Both web and mobile applications.
+- Meteor uses mongodb in the backend.
+- You can install packages from atmosphere that are written specifically for meteor with `meteor add pkg` or also use npm packages by `meteor npm install pkg`.
+- Meteor supports 3 UI rendering libraries: Blaze, React, Angular.
+- Some built-in user-accounts systems are available.
+- Meteor offers testing:
+    - Unit testing: testing modules separately
+    - Integration testing: tesing modules together
+    - Acceptance testing: testing browser button functionality etc
+    - Load testing: test how app handles load
+- Install meteor, check `meteor --version`.
+- Create a project with `meteor create project_name`. cd into project_name folder, run `meteor`. that will open up your project. In browser go to `localhost:3000`.
+- We will work on the client and server folder. 
+- In html files, we can define templates and use them.
+- We basically create functions in main.js inside of template_name.helpers(), and we can use those funtion names in the html to get values.
+- With a folder outside the server and client folder, it will be accessible to both the server and the client.
+- With `meteor mongo` in shell, you can access the database. Also use it from the browser console, it's accessible both server and client as we created the file as such.
+- `meteor remove insecure` and now you cant't access db directly from client, that has to be done by the server on clients request.
+- By default meteor has autopublish which allows any collection to be published anywhere. Run `meteor remove autopublish`. Publish a db from server, subscribe to it from client side.
+- To style with bootstrap use `meteor add twbs:bootstrap`. It will be automatically in effect, we don't have to link to it or anything. 
+
+### 3. 

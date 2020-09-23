@@ -68,4 +68,20 @@
 - To style with bootstrap use `meteor add twbs:bootstrap`. It will be automatically in effect, we don't have to link to it or anything. 
 
 ### 3. Angular
-- 
+- Client side framework (so its actually front-end but taught in the backend section of the course for relevance).
+- Used often with Single Page Applications (SPA).
+- Components in Angular divide the code into reusable chunks, make it easier to read, and makes it easy for multiple developers to collaborate.
+- It has components, a class for that component, and those are accessed from html by tag name of the components selector. Html is put in the template part of the component.
+- It uses Typescript which is a typed superset of javascript that compiles down to javascript.
+- Create app from scratch:
+    - Have `nodejs`, `npm` the install `Angular`. See angular docs to replace package.json contents, which you created by `npm init`. You can start your application by `npm start`.
+    - Also create tsconfig.json, typings.json, system.config.js. See docs. Btw, all these can be created with angular quick start.
+    - Then do `npm install`. 
+- Quick Start: 
+    - Clone their github repo (see docs).
+    - `npm install`, `npm start`.
+- Instead of putting html in template string, use template url and link to html file.
+- ngModel data binding, connects data in all places for a variable, like in a text input box, h1 tag etc.
+- Services grab data from wherever, and components can use these data provided by the services. Add the service as a provider in the post service. Set it up as a promise to perform asynchronous data transfer.
+- Use `jsonplaceholder.typicode.com` as a dev tool, it offers a json api to which we can make requests to.
+- We can use observables to do asynchronous data streaming from services, and subscribe to those from components.

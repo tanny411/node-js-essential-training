@@ -86,7 +86,7 @@
 - Use `jsonplaceholder.typicode.com` as a dev tool, it offers a json api to which we can make requests to.
 - We can use observables to do asynchronous data streaming from services, and subscribe to those from components.
 
-### 3. PHP
+### 4. PHP
 - Powerful open source server side programming language, executed on server then generates html to show on client side. Interpreted at runtime, no compiling. 
 - Directly embedded in html using <?php ?>.
 - XAMPP is a bundled software that bundles together php, mysql and apache server for use. Server parses the .php files.
@@ -201,7 +201,7 @@
     - Two main choices, mysqli and PDO. mysqli is barely faster, pdo is a little hard to learn but safe and supports lots of other data drivers, not just mysql.
     - `mysqli_connect()` to connect, `mysqli_connect_errorno()` to check connection and `mysqli_connect_error()` to show error.
     - `mysqli_query()` to give query and `mysqli_fetch_assoc()` to get the result as an associative array.
-- The OOP way
+- **The OOP way**
     - Folder Structure: 
         - lib (has class files including Template class, Database class etc)
         - config (has config file, which has all the includes)
@@ -213,4 +213,31 @@
     - Now we create templates for all the files like first_page, about_page and pass in the path to these files along with the variables it will need and echo the template object from the index page. It will work kindof like a template engine.
     - Also have a config file that has all the includes you need for all files. So instead of bunch of includes, we include only the config file. Also has all the constants etc.
     - We can use autoloader, which will do the require_once only when the class is instantiated.
-    - 
+
+### 5. Ruby On Rails
+- Ruby is a multi paradigm programming language with dynamic type system. Everything is considered as objects.
+- RubyGems is the package manager for ruby. Bundler is used to manage and track gems. RubyGems and Bundler both come with RailsInstaller in windows.
+- Rails is a server-side web application framework written in ruby. Uses the **MVC** design pattern. Model manages the data and logic, View is the output representation and Controller controls the flow of information between model and view.
+- Check installation with `ruby -v`, `rails -v`, `gems -v`, `bundler -v`.
+- Working with Rails
+    - `rails new app_name` to create a new app, cd into Sites folder rails had created.
+    - cd into your app folder and do `bundle install`.
+    - `rails server` to start the app
+    - `rails generate controller Pages` to create the Pages controller.
+    - You can add method names which will also generate view files like this `rails generate controller Pages index about services`. It will also add the get routes.
+    - Instead of all individual get routes we can do this `resources :controller_name`.
+    - See all your routes from CLI by `rake routes`.
+    - In routes.rb you set the routes for your controller methods. Controller method and views page name matches.
+    - Dynamic data from controller methods can be used in respective views.
+    - To avoid repetitive code create a `partials` folder and then render partial files in your desired places. 
+- Rails DB:
+    - Rails uses sqlite by default. We can easily change it.
+    - No matter what database we are using, with database migration, most things are gonna remain the same.
+    - We create models with `rails generate Post title:string body:text` and this creates a migration file and model file.
+    - The migration is gonna create tables, to run this migration and create the table we do `rake db:migrate`.
+- **Take aways**
+    - Its good for super fast development and prototyping, much of the typical stuff are ready made. DB connections, queries nothing required, all happens from the code directly, like PUT updates and DELETE deletes etc.
+    - It goes a little beyond the typical html and turns into something else completely on its own. Its own way to interact with DB, with forms etc. Which is fast but tricky to understand whats going on behind the scenes. If you are comfortable ignoring the backstage, you can go ahead.
+    - Need to first understand the relationship between the various components of MVC, how they interact and work together.
+    - Basically turns web development into a sort of high level language which has a lot of abstractions.
+

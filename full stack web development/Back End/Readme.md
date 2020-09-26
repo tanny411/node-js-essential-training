@@ -27,7 +27,7 @@
     - We don't even have to create database or anything, it can be created throug the application, if it doesnt find the dabase or collection we specify it's gonna create it automatically.
     - In the project `npm install mongojs --save`.
     - In app.js
-        ```
+        ```javascript
         const MongoClient = require('mongodb').MongoClient;
         const url = 'mongodb://localhost:27017/myproject';
         MongoClient.connect(url, function(err, db){
@@ -53,7 +53,7 @@
 - Some built-in user-accounts systems are available.
 - Meteor offers testing:
     - Unit testing: testing modules separately
-    - Integration testing: tesing modules together
+    - Integration testing: testing modules together
     - Acceptance testing: testing browser button functionality etc
     - Load testing: test how app handles load
 - Install meteor, check `meteor --version`.
@@ -85,3 +85,132 @@
 - Services grab data from wherever, and components can use these data provided by the services. Add the service as a provider in the post service. Set it up as a promise to perform asynchronous data transfer.
 - Use `jsonplaceholder.typicode.com` as a dev tool, it offers a json api to which we can make requests to.
 - We can use observables to do asynchronous data streaming from services, and subscribe to those from components.
+
+### 3. PHP
+- Powerful open source server side programming language, executed on server then generates html to show on client side. Interpreted at runtime, no compiling. 
+- Directly embedded in html using <?php ?>.
+- XAMPP is a bundled software that bundles together php, mysql and apache server for use. Server parses the .php files.
+- It has drivers to work with noSQL too. php is also multi-paradigm, so both functional and OOP.
+- Installation:
+    - Linux installation more suited for actual hosting:
+        ```
+        sudo apt-get update
+        sudo apt-get install apache2 (check in localhost)
+        sudo apt-get install php7.0 php-pear libapache2-mod-php7.0 php7.0-mysql
+        sudo systemctl restart apache2
+        sudo gedit /var/www/html/test.php (<?php echo 'Hello World'?>, and then check in localhost/test.php)
+        sudo apt-get install mysql-server (put root password when asked)
+        mysql -u root -p
+        CREATE DATABASE testdb;
+        SHOW DATABASES;
+        exit
+        ```
+    - For development purposes just get xampp. In windows run xampp-control.exe as administrator. Click the red crosses of apache and mysql and turn 'em to green ticks, meaning they will now be installed as services and will run in the background. Start apache and mysql. Now localhost should show you xampp. You will have your htmls in xampp >> htdocs. Create your website folder here.
+    - For Linux, download xampp, then 
+        ```
+        sudo chmod +x xampp-linux-1.8.3-installer.run
+        sudo ./xampp-linux-1.8.3-installer.run
+        ```
+        - /opt/lampp/htdocs (put your web files here)
+        -  sudo chmod -R a+rwx htdocs (from lampp folder)
+        - In browser: http://localhost/phpmyadmin/
+- PHP language:
+    - Constant: `define('CONSTVAR', 'value'); echo CONSTVAR;`. Constants don't use dollar sign.
+    - Variables always start with $ sign. `$user`.
+    - String concat by a `.` like `$user.' has '.$num.' books.'`.
+    - `$ara = Array('one', 'two', 'three')`
+    - `$ara = ['one', 'two', 'three']`. Array append dynamically, `$ara[3]='newNumber'`.
+    - Associative array: `$nums = Array('one' => 1, 'two' => 2)`
+    - Looping for arrays: `foreach($item as $ara){}`
+    - `var_dump($var)` will show the data type.
+    - `date('Y/m/d')` or l, M, Y, 'h:i:sa' etc. Set timezone with `date_default_timezone_set('America/New_york')`.
+    - `$d = strtotime('tomorrow')` or today , 11 January 2020. Then display with `date('Y-m-d', $d)`.
+- PHP Super Globals
+    - $_POST['fieldname'] and $_GET['fieldname'] are used to access variables from html to php.
+    - To give get parameters, `header("Location: index.php?error=Please%20fill%20all")`.
+    - `if():` and `endif;` and you don't have to use the curly braces. Similarly, `foreach():` and `endforeach;`.
+    - To use cookies `setcookies($cookie_name, $cookie_val, time()+secs)`, third parameter is till when to make the cookie last. Access it with `$_COOKIES[$cookie_name]` and can be used across pages. Cookies are set in clients browser.
+    - Session does the same kind of thing, except its on the server and not on the clients browser. Every page you are using session, you have to include `session_start();`. Then set with `$_SESSION['username']='myName'`. These can be used across pages. These will last until you close the browser.
+    - `$_SERVER[PHP_SELF]` can be used to post to the same page.
+    - Check with `isset(var)` and unset it with `unset(var)`.
+    - To unset all session variables, `session_unset();` and you can `session_destroy();`.
+- OOP: No need for explanation if a code snippet is all you need.
+    ```php
+	class Book{
+		// Properties
+		protected $price;
+		protected $title;
+		public static $store = 'My Store';
+
+		public function __construct($title, $price){
+			$this->title = $title;
+			$this->price = $price;
+			echo '<br>The class "',__CLASS__,'" was instantiated!<br>';
+		}
+
+		public function __destruct(){
+			echo '<br>The class "',__CLASS__,'" was destructed!<br>';
+		}
+
+		public function __toString(){
+			return $this->getTitle();
+		}
+
+		// Methods
+		public function setTitle($title){
+			$this->title = $title;
+		}
+
+		public function getTitle(){
+			return $this->title;
+		}
+
+		public static function getStore(){
+			return self::$store;
+		}
+	}
+
+	class Magazine extends Book {
+		public $month;
+		public $year;
+
+		// Constructor
+		public function __construct($title, $price, $month, $year){
+			$this->month = $month;
+			$this->year = $year;
+
+			parent::__construct($title, $price);
+			echo '<br>The class "',__CLASS__,'" was instantiated!<br>';
+		}
+
+		public function getYear(){
+			return $this->year;
+		}
+    }
+    ```
+    ```php
+    include 'Book.php';
+
+    echo Book::getStore();
+
+	$book1 = new Book('My Book', 9.99);
+	echo $book1->setTitle('My Book');
+	echo $book1->getTitle();
+    ```
+- MySQL with PHP
+    - Two main choices, mysqli and PDO. mysqli is barely faster, pdo is a little hard to learn but safe and supports lots of other data drivers, not just mysql.
+    - `mysqli_connect()` to connect, `mysqli_connect_errorno()` to check connection and `mysqli_connect_error()` to show error.
+    - `mysqli_query()` to give query and `mysqli_fetch_assoc()` to get the result as an associative array.
+- The OOP way
+    - Folder Structure: 
+        - lib (has class files including Template class, Database class etc)
+        - config (has config file, which has all the includes)
+        - templates
+            - inc (has the header, footer files)
+            - other pages
+        - index.php 
+    - Create a class called **Template** that will take in a template file path to display and bunch of parameters along with it.
+    - Now we create templates for all the files like first_page, about_page and pass in the path to these files along with the variables it will need and echo the template object from the index page. It will work kindof like a template engine.
+    - Also have a config file that has all the includes you need for all files. So instead of bunch of includes, we include only the config file. Also has all the constants etc.
+    - We can use autoloader, which will do the require_once only when the class is instantiated.
+    - 

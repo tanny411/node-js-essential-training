@@ -47,4 +47,36 @@
     - Connect to pgsql with `$con = pg_connect("host=".$dbhost." port=".$dbport." dbname=".$dbname." user=".$dbuser." password=".$dbpass);`. Use `pg_query`, `pg_close`.
     -  `$result = pg_query_params("INSERT INTO articles(title, body, category_id) VALUES($1, $2, $3)", array($title, $body, $category_id));` is more secure than sending in a query string directly.
 
-### 3. 
+### 3. MongoDB
+- NoSQL means 'Not Only SQL'. It is an alternative to SQL and can infact apply SQL-like query concepts. NoSQL has been increasingly popular with big data and real-time web apps. They are easier to scale, and dont need to think of schema before hand. 
+- NoSQL commonly uses horizontal scaling. It means to add more nodes to a system, or computers to a distributed system, increasing the number of servers.
+- Vertical scaling on the other hand means adding high end resources to a single node in a system, like CPU, memory, drives etc. Uses virtualization technology more effectively.
+- Types of NoSQL dbs:
+    - Column: Cassandra, Hbase, Vertica
+    - Document: MongoDB, CouchDB, Rethink
+    - Key/Value: Couchbase, Dynamo, Memcached, Redis
+    - Graph: Neo4J, MarkLogic
+- MongoDB holds data in document type files like json files, actually bson, which is a binary representation of the json files. It is schema less, one collection holds different documents with unlimited fields of any type. Collection is like a table and document is like rows. No complex joins. 
+- If you just have a lot of data and not a whole bunch of relationships, NoSQL is probably the way to go.
+- Download: Mongodb website >> community server. Create a folder `data/db` in the installed location, this is where all your dbs will be stored. Also create a folder called `log`. Go to mongodb/bin and run `mongod --directoryperdb --dbpath path_to_db_folder --logpath path_to_log_folder/mongodb.log --logappend --rest --install`. Then start the service `net start MongoDB`.
+- Mongo Find commands:
+    - From bin folder `mongo` command will start the mongo shell.
+    - `show dbs`, `use newdb` to create and switch to the newdb. `db.createCollection('newCollection')`. Check which db you in `db`. `show collections`. 
+    - Add dates with `new Date('2020-12-12')`. Insert documents by `db.collection_name.insert({ your_document_json_object_like })`. See data by `db.collection_name.find();`. Use `.pretty()` to make it look better. Insert as an array of objects to insert more than one.
+    - Search by `db.collection_name.find({name: 'aisha'})` works exactly like this even if you wanna search from arrays. To search from objects `.find({ client: { name: 'aisha', age : 30 } })`. But if you don't want to match the object exactly do `.find({"client.name":"aisha"})`. You can also use regex.
+    - You can findOne(). You can limit what to return `.find({condition},{name:1, client:1})`, 1 means to include something. Put 0 to get everything but those fields.
+    - `.find().sort({name:1})` ascending, -1 is descending.
+    - `.limit(3)` get the first 3, `.skip(2)` skip the first two.
+    - .find() returns a cursor object that we can store in a variable like `var myCursor = db.collection_name.find()` and then we can use it normally, or iterate through it with `.next()`, check with `myCursor.hasNext() ? myCursor.next() : null`.
+    - `field: {$eq: 2}`, we also have ne, gt, gte, lt, lte, `{field : {$exists: true}}`, `{$in:[list_of_stuff]}`. `$or: [{cost: {$eq: 2000 }}, {cost: {$gt: 100000}}]`, $and.
+    - `db.collection_name.aggregate({$limit :2})`, $skip, $sort{name: 1}, `.aggregate([{$match : {name: 'aisha'}}])`.
+    - We can also concat fields together and display as another name.
+- Mongo Update commands:
+    - `db.collection_name.update({condition},{replacemet})`, to update just a single field do `.update({condition}, {$set : {update_field:"value"}})`, to update array values so `{$set : "array_name.0" : "new_val"}` 0 is the index, 1,2 etc. Similarly to update object values `{ "client.name" : "new_val" }`
+    - To push to array use `$push` in place of set. To remove from array use `$pull`. To remove the last element use `$pop: {array_name:1}`.
+    - If we update with a condition that doesn't match anything, it does nothing. If we want such that an entry is created if nothing is matched, we use `{upsert:true}` as a third parameter in update query.
+    - `.findAndModify()` returns the found result, then updates.
+    - `.remove()`
+- Using Mongoose and Node:
+    - Install mongoose with npm in a nodejs project. We create a folder called models and add .js file in there which has a mongoose.Schema() variable containing the layout of the database with the data types. Although it is not necessary for NoSQL, it's a good idea to do it for mongoose. This can ofcourse be changed on the fly since it is NoSQL. connect by `mongoose.connect('mongodb://localhost/dbname')` and call the exported model variable to operate on the database. See code for more (folder 10).
+    - RestEasy chrome extension to send post requests. Use jsonformatter website to check json formatting of the post requests body.

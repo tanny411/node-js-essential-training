@@ -108,3 +108,57 @@
     - To get a document `GET $HOST/new_db/the_id`
     - To update a document `PUT $HOST/new_db/the_id -d "{"_rev":"the_rev_id", "name":"not_aisha"}"`
     - To delete `DELETE $HOST/new_db/the_id?rev=the_rev_id`
+
+### 5. Redis
+- It is an **in-memory** data structure, not on disk, and can be classified as a 'key-value store'. It uses replication, LUA scripting and different levels of data-persistence. It works like NoSQL technologies but main difference is that it is memory-based. Redis is used for caching. Unlike memcached, data can be persisted to disk.
+- Redis allows transactions, i.e. All commands are run serially and either ALL or NONE of the commands are executed. Enter a transaction with MULTI command, and execute all commands of the transaction with EXEC.
+- Redis allows partitioning so that much larger databases and scaling to multiple cores and computers.
+- Redis CLI is present, can be used in many languages.
+- Install from website. Go to the location of installation run `redis-server config_file_name`. Now the server is running, `redis-cli`. Test with `ping`.
+- Redis CLI commands
+    - echo hello
+    - SET name "aisha", GET name
+    - EXISTS name
+    - DEL name
+    - SET COUNT 10, INCR count, DECR count to increase and decrease values.
+    - from bash `redis-cli echo hello` runs single redis commands.
+    - `monitor`, from another redis CLI if you run commands, the monitor cli will show whats going on.
+    - Use namespces like `SET user:name "aisha"` where 'user' is a namespace. You can put more like user:email, user:phone.
+    - We can set the variables to expire in some time. `EXPIRE name 100`. Here 100 is in seconds. Check how much time is left with `TTL name`.
+    - `FLUSH ALL` removes everything.
+    - To set multiple vaues at once use MSET, similarly MGET. Space separated variable names.
+    - MSETNX sets multiple values but aborts of some variable being set here already exists.
+    - Combine SET and EXPIRE as `SETEX key 20 "value"`. Or set by millisecs by `PSETEX` and check time left in millisecs by PTTL.
+    - APPEND greeting hello. Initially it will set, and later it will start appending.
+    - RENAME var new_var
+    - STRLEN var
+    - GETSET returns current value and sets new value
+    - GETRANGE str 0 4
+- Lists
+    - LPUSH ara hello, creates a list with 1 element. The LPUSH will insert to head, RPUSH to push to tail.
+    - To view list LRANGE ara 0 -1, -1 to indicate end of list. GET ara won't work. Length of list with LLEN.
+    - LPOP, RPOP to POP.
+    - LINSERT ara BEFORE somevalue newvalue
+- Hashes: String to string mapping
+    - HSET myvar key "val" and to GET we do HGET myvar key. Can't get entire myvar. Set multiple keys for myvar with HMSET. To GET multiple use HMGET myvar key1 key2. HGETALL gives all keys and values. HKEYS gives only the keys. Or HVALS.
+    - HINCRBY myvar age 1
+    - HDEL myvar key1
+    - Number of elements with HLEN
+- Sets
+    - SADD myset "Hello". And repeat. Adding same element returns 0, nothing is added.
+    - Check if in set, SISMEMBER myset "Hello" returns 1.
+    - List all by SMEMBERS
+    - Get number of variables by SCARD myset
+    - SMOVE source_set dest_set "val". Removes it from source_set and adds it dest_set.
+    - Remove by SREM
+    - SRANDMEMBER myvar count, give count number of random members from the set
+    - SPOP, SUNION, SDIFF
+- Sorted Sets
+    -  Sorted scores require a 'score' to be added with every element. The scores need not be unique but the values are unique, hence the name set. It is sorted by the score. We use Z instead of S for sorted sets. `ZADD myset 1981 "value"`.
+    - ZRANGE myset 0 -1. ZRANGEBYSCORE. 
+    - Get index by ZRANK myset "value". From reverse do ZREVRANK.
+    - ZCARD for total count, get score by ZSCORE mysel "value".
+- Data persistence: We can persist data to disk, or not and use as cache only. Ways to persist are RBD or AOF or both.
+    - RDB or Redis database file just saves snapshots, good for backup and recovery, and faster restarts with big dbs. Snapshots are produced as .rdb files and user has to envoke SAVE and BGSAVE command. Simply `SAVE` or `SAVE 60 100` dumps to disk every 60 seconds if at least 100 keys changed. It is done synchronously. BGSAVE on the otherhand saves in the background and parent continues to serve clients. Saves in dump.rdb file.
+    - AOF or append only file and is more reliable, no data loss or anything. Every operation gets logged and this creates an instruction set for the database. When the AOF file gets too big, the db in memory is written from scratch in a temp file and then synched to disk. Its a single file, no corruption, more durable and auto rewrites in the background if it gets too big. But it takes longer to load in memory on server restart.
+- In the redis `conf` file, change appendonly from no to yes to use AOF. Default is RDB. appendfsync is every second by default. Restart redis (from task manager in windows). Saves in appendonly.aof file.

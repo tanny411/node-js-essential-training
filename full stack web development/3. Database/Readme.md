@@ -80,3 +80,31 @@
 - Using Mongoose and Node:
     - Install mongoose with npm in a nodejs project. We create a folder called models and add .js file in there which has a mongoose.Schema() variable containing the layout of the database with the data types. Although it is not necessary for NoSQL, it's a good idea to do it for mongoose. This can ofcourse be changed on the fly since it is NoSQL. connect by `mongoose.connect('mongodb://localhost/dbname')` and call the exported model variable to operate on the database. See code for more (folder 10).
     - RestEasy chrome extension to send post requests. Use jsonformatter website to check json formatting of the post requests body.
+
+### 4. CouchDB
+- Document type NoSQL database, used JSON like format and has subscribable data updates in the _changes feed. It uses Couch replication protocol to synchronize JSON documents between two peers using the CouchDB REST API. It has a REST-like interface.
+- `instance_start_time` and `update_seq` fields in response are mandatory. Replicator must generate a Replication ID before sending data SOURCE -> TARGET (called replication).
+- It can work on a single node, then it doesn't take advantage of things like new scaling and fault tolerance. It can run on clusters too.
+- 'Fauxton' is the Web UI for CouchDB, can be installed with npm as well as with windows CouchDB installer.
+- Installation:
+    - Windows: Install CouchDB from the website, open    `localhost:5984/_utils/
+    - Linux: This installs couchdb and futon. Futon is similar to fauxton.
+        ```
+        sudo apt-get update
+        sudo apt-get install software-properties-common -y
+        sudo add-apt-repository ppa:couchdb/stable -y
+        sudo apt-get update
+        sudo apt-get install couchdb -y
+        curl localhost:5984
+        ```
+- Using Fauxton GUI: configure a single node. Then verify installation. Create a database and start adding documents. Create database >> for each row create a new document. Options >> include docs to view the key-vals of the docs. We can also view it in table format. API buttons shows an example api call to fetch all rows.
+- Using Futon GUI: This is an older GUI that has been replaced by Fauxton in newer CouchDB versions. At the bottom right it shows everyone is admin, click the fix this link. Verify installation. New database >> new document >> add fields >>save document.
+- database >> all document >> new view >> produces a map function, outputs a key-value pair. Creates various 'views' of our database. We can use standard JS functions in the view creation function. We can also add conditions. API requests to get those views are shown. In the API url we can change limit and add `&decending=true` etc.
+- Set up remote db and replicate: IBM Cloudant offers free services, sign up and , set to accept request from all domains in CORS. From local db >> replication >> set to server as remote >> https://myusername:mypassword@myusername.cloudant.com >> check create target >> click replication. Your db will now be available in cloudant. 
+- From command line use curl to use CouchDB. 
+    - Get all dbs `curl -X GET $HOST/_all_dbs` where $HOST = http://localhost:5984. To login as admin set $HOST=http://myusername:mypassword@localhost:5984. 
+    - Add db by `GET $HOST/new_db`
+    - To add a doc in new_db, fisrt we need to create our own UUID (thats auto set in GUI), by `GET $HOST/_uuids`. Copy that id. Then `PU $HOST/new_db/the_id -d "{"name":"aisha","age":60}"`
+    - To get a document `GET $HOST/new_db/the_id`
+    - To update a document `PUT $HOST/new_db/the_id -d "{"_rev":"the_rev_id", "name":"not_aisha"}"`
+    - To delete `DELETE $HOST/new_db/the_id?rev=the_rev_id`

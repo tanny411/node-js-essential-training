@@ -1,0 +1,44 @@
+ping
+
+echo hello
+
+SET name "John Doe"
+
+GET name
+
+EXISTS name
+
+EXISTS name2
+
+DEL name
+
+EXISTS name
+
+SET count 10
+
+INCR count
+
+INCR count
+
+DECR count
+
+DEL count
+
+redis-cli echo hello
+
+monitor
+
+SET foo bar
+
+SET user:name Mike
+
+SET user:email mike@gmail.com
+
+EXPIRE user:name
+
+TTL user:name
+
+TTL user:name
+
+EXISTS user:name
+

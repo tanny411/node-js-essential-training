@@ -1,3 +1,4 @@
 node_modules/
 videos/
 settings.json
+*/.vscode/

@@ -162,3 +162,92 @@
     - RDB or Redis database file just saves snapshots, good for backup and recovery, and faster restarts with big dbs. Snapshots are produced as .rdb files and user has to envoke SAVE and BGSAVE command. Simply `SAVE` or `SAVE 60 100` dumps to disk every 60 seconds if at least 100 keys changed. It is done synchronously. BGSAVE on the otherhand saves in the background and parent continues to serve clients. Saves in dump.rdb file.
     - AOF or append only file and is more reliable, no data loss or anything. Every operation gets logged and this creates an instruction set for the database. When the AOF file gets too big, the db in memory is written from scratch in a temp file and then synched to disk. Its a single file, no corruption, more durable and auto rewrites in the background if it gets too big. But it takes longer to load in memory on server restart.
 - In the redis `conf` file, change appendonly from no to yes to use AOF. Default is RDB. appendfsync is every second by default. Restart redis (from task manager in windows). Saves in appendonly.aof file.
+
+### 5. Memcached
+- Like redis, but more on the memory and caching side. No data persistence. Can be used for distributed systems. Almost every renouned website uses it.
+
+    ![](images/memcache.png)
+
+- There are clients for many many languages. You can use with one client and get with another, since its just memcache in the backend.
+- Common commands are set, get, add(set if not already set), delete, replace, append, prepend, incr, decr, flush_all, stats etc
+- Installation in Linux Ubuntu:
+    ```
+    sudo apt-get install memcached
+    sudo /etc/init.d/memcached status
+    ```
+    Should show started. Shows the port after `-p` with which we can access it through telnet. By default allocates 64MB. We can check by `ps -ef | grep -i memc`.
+- Connect though telnet by `telnet localhost the_port_number`. `quit` get you out of there.
+-  sets key-value for 3600 seconds, key has 4 bytes and no flags set here (0). `add` will add key-value pair only if the cache doesn't already have that key set.
+    ```
+    set key 0 3600 4
+    value
+
+    get key
+
+    delete key
+
+    add age 0 3600 2
+    14 (value)
+
+    append age 0 3600 2
+    10
+    get age (gives 1410)
+
+    prepend age 0 3600 2
+    10
+    get age (gives 101410)
+
+    replace age 0 3600 2
+    24
+    get age (gives 24)
+
+    incr age 2
+    get age (gives 26)
+
+    decr age 10
+    get age (gives 16)
+
+    stats
+    flush_all
+    ```
+- We can do same stuff with libmemcached-tools. `sudo apt-get install libmemcached-tools`.
+    - `memcstat --servers localhost` will show stats like the stats command in telnet.- Ddeleting still keeps the keys so restarting memcache will clear everything out with `sudo /etc/init.d/memcached restart`.
+    - `memcdump --servers localhost` shows all keys dump.
+    - `memccat --servers localhost key` to see the value
+    - `memcrm --servers localhost key` to delete it.
+    - We can copy files with the filename as key and contents as value. Lets just create a thousand files ``for i in `seq 1000`; do echo $i >> book$i; done``. Then create key-values for these files with `memccp --servers localhost book*`
+- Memcached with python.
+    - `sudo apt-get install python-memcache`
+    -  port is localhost:11211
+        ```
+        python
+        import memcache
+        mc = memcache.Client(['127.0.0.1:11211'], debug=0)
+        mc.flush_all()
+        mc.set('name', 'aisha')
+        mc.get('name')
+        mc.delete('name')
+        mc.incr('age') # or decr
+        mc.set_multi({'name':'aisha', 
+                      'email':'something@gmail.com', 
+                      'website':'example.com'})
+        mc.get_multi(['name', 'email', 'age'])
+        mc.delete_multi(['name', 'email', 'age'])
+        ```
+- Memcached with PHP.
+    -   ```
+        sudo apt-get install apache2
+        sudo apt-get install php7.0 libapache2-mod-php7.0
+        sudo apt-get install php-memcache
+        ```
+    - make your website in /var/www/html/your_site with sudo. Change owner of the folder to yourself by `sudo chown user_name your_site`. 
+    - ```php
+        $mc = new Memcache;
+        $mc->connect('127.0.0.1:11211');
+        $mc->set('name', 'aisha')
+        $mc->get('name')
+        $mc->set('name', 'aisha', 0, 30) // 0 flag for 30 seconds
+      ```  
+    - With this we can cache pages and whenever we wanna load pages we can check if they are cached, if not we pull up page contents and save in cache.
+
+

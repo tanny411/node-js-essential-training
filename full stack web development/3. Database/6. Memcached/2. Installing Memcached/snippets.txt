@@ -1,0 +1,13 @@
+$ sudo apt-get install memcached
+
+$ sudo apt-get install memcached
+
+$ ps -ef | grep -i memc
+
+$ telnet localhost 11211
+
+>version
+
+>stats 
+
+>quit

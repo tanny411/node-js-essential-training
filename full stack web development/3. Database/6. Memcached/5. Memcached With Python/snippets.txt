@@ -1,0 +1,36 @@
+sudo apt-get install python-memcache
+
+python
+
+>>>import memcache
+
+>>>help(memcache)
+
+mc = memcache.Client(['127.0.0.1:11211'], debug=0)
+
+mc.set("name", "John Doe")
+mc.get("name")
+myname = mc.get('name')
+myname
+
+mc.set("test", "hello")
+mc.delete("test")
+
+mc.get("test")
+
+mc.set("age", 35)
+mc.incr('age')
+mc.decr('age')
+
+// Reduces bandwidth and overall latency
+mc.set_multi({'name':'Sam Smith', 'email':'ssmith@gmail.com', 'age': 33})
+mc.get('name')
+mc.get('email')
+
+mc.get_multi(['name', 'email', 'age'])
+user = mc.get_multi(['name', 'email', 'age'])
+user.keys()
+user.values()
+user['name']
+mc.delete_multi(['email','age'])
+mc.flush_all()

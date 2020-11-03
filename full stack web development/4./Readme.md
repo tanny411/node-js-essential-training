@@ -24,3 +24,55 @@
     });
 	});
     ```
+
+### 2. Sass
+- `Syntactically Awesome StyleSheets` sass is a css preprocessor that extends css and we can write "code" in one language and compile it in css. File extensions are `.sass` and `.scss`. Others are 'less' and 'Stylus'.
+- Make sure to link your css file in html. Browser wont know what to do with scss file.
+- We can have 
+    - variables: `$bg:blue;`
+    - nesting:
+        ```scss
+        .container{
+            padding: 0px;
+            ul{
+                background-color: $bg
+                li{
+                    color: white
+                }
+            }
+        }
+        ```
+    - partials: import one scss in another. Partials filename have to start with a `_`. Import by `// _myscss.scss` at the top of the other scss file. Or `@import 'myscss.scss'; `
+    - mixins: bunch of css declarations that we can run at once. We can pass parameters, its kinda like a **function**. You wanna put your mixins in a partial.
+        ```scss
+        @mixin border-radius($radius){
+            border-radius: $radius;
+            -moz-border-radius: $radius;
+        }
+
+        .box{
+            // other styles
+            @include border-radius(20px);
+        }
+        ```
+    - extend and inherit styles. 
+        ```scss
+        .container{
+            // stuff stuff
+        }
+        .h1.red{
+            @extend .container
+            border-color: red;
+        }
+        .h1.blue{
+            @extend .container
+            border-color: blue;
+        }
+        ```
+    - perform operations and calculations. `width: 400px + 100px`. `@if $val == 1 { li{ color:green } }`
+    - `mix(white, $color, 40%)` this makes $color 40% white.
+- To compile the sass files(3 ways):
+    - Application: Coedit, Compass.app, Koala etc
+    - CLI: Requires ruby installed
+    - Runtime: Use task runner like Grunt or Gulp
+- In Koala: Select the scss folder of your project. Set putput path to the css folder. Its gonna create it for you.

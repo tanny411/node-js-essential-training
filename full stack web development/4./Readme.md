@@ -182,5 +182,5 @@
         grunt.registerTask('default', ['watch']);
       }
       ```
-      - If we didn't have watch we would have `grunt.registerTask('default', ['concat']);`, since we concat through watch, we don't add that anymore.
-      - After adding watch if you run `grunt` it is gonna be in waiting mode in CLI, and when you make changes its gonna run tasks.
+    - If we didn't have watch we would have `grunt.registerTask('default', ['concat']);`, since we concat through watch, we don't add that anymore.
+    - After adding watch if you run `grunt` it is gonna be in waiting mode in CLI, and when you make changes its gonna run tasks.

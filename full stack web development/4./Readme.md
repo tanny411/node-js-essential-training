@@ -75,4 +75,9 @@
     - Application: Coedit, Compass.app, Koala etc
     - CLI: Requires ruby installed
     - Runtime: Use task runner like Grunt or Gulp
-- In Koala: Select the scss folder of your project. Set putput path to the css folder. Its gonna create it for you.
+- In Koala: Select the scss folder of your project. Set output path to the css folder. Its gonna create it for you.
+
+### 3. Git
+- `sudo apt-get install git`. Check `git --version`
+- Common commands ![](images/git.png)
+- 

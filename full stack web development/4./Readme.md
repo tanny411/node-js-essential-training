@@ -184,3 +184,29 @@
       ```
     - If we didn't have watch we would have `grunt.registerTask('default', ['concat']);`, since we concat through watch, we don't add that anymore.
     - After adding watch if you run `grunt` it is gonna be in waiting mode in CLI, and when you make changes its gonna run tasks.
+
+### 5. Chrome Developer Tools
+- Allow us to test, examine and debug code.Full console logging, edit code in real-time, DOM element selecting, optimize with profilers, powerful JS debugger (set break points and all), resource viewers, network analytics (view all requests our page makes and thus helps optimize speed and reliability), Audits (Analyze pages as they load and provides suggestions to speed things up),  Timeline shows where most load time is being spent.
+- From **elements tab** we can experiment with our elements, remove, drag and move, hide etc. We can add classes, set css styles and much more. 
+- If we want to add *permanent* edits/styles, go to **sources tab**, add your folder to workspace by right clicking it, and now you can edit your sources. 
+- In **network tab** you can see all your files and check if everything loaded and time it took. **PageSpeed Insights extension** for chrome dev tools gives us a new tab that gives us suggestions on how to reduce load speed. For example minify js and css files, used task runners or online *closure*.
+- **console tab** is a command line and logger too. We can also filter through the logs. We can use `$('h1')` like jquery. WE can inspect($('h1')) shows the element on screen and on elements tab.
+- To debug, we can add `break points` through sources tab -> click the line number.
+- Click pretty print `{}` to make code look nice, remove extra space, un-minify etc and so easier to work with.
+- **Application tab --> Storage**: you can see your localStorage values and edit them. Same with sessionStorage.
+- It won't show cookies until you run from a server, i.e, wont show if you just open file.
+- We can create and store data in WebSQL database in browser and view under Application --> Storage.
+    ```javascript
+    // Create Database
+    var mydb = openDatabase('testdb', '0.1', 'Test Database', 1024 * 1024);
+
+    // Create Table
+    mydb.transaction(function(t){
+        t.executeSql('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name VARCHAR(50))');
+    });
+
+    // Insert Record
+    mydb.transaction(function(t){
+        t.executeSql("INSERT INTO users (name) VALUES (?)", ['John Doe']);
+    });
+    ```

@@ -213,6 +213,43 @@
     - Now we create templates for all the files like first_page, about_page and pass in the path to these files along with the variables it will need and echo the template object from the index page. It will work kindof like a template engine.
     - Also have a config file that has all the includes you need for all files. So instead of bunch of includes, we include only the config file. Also has all the constants etc.
     - We can use autoloader, which will do the require_once only when the class is instantiated.
+- ERROR:
+    - Error Types: 
+        - E_ERROR: Fatal errors, causes the script to terminate. Php understands the code, but it cant be done.
+        - E_WARNING: Runtime error that doesn't cause the script to terminate. Missing includes, incorrect number of params etc.
+        - E_PARSE: Compile time parse error. Typo in your code.
+        - E_NOTICE: Runtime notice. Less severe warnings, could cause problems later.
+    - In debug mode we wanna see all errors, but disable them in production. We can enable or disable in the code itself, or from the  `php.ini` file to apply it server wide.
+    - Look for `display_errors` in php.ini file and `error_reporting` and more. Make sure `display_errors=On` is not commented out. Similarly log errors, startup errors, error reporting. 
+    - To turn off error in certain page, `error_reporting(0);` or turn on all error, put `-1` or `E_ALL` even if off in php.ini. Other combinations, like `E_ALL & ~E_NOTICE` means all errors except notices.
+    - We can set values to php,ini by `ini_set('display_errors', 'off')`
+    - Generate errors: 
+        - `trigger_error('This is a fatal error', E_USER_ERROR)`
+        - `trigger_error('This is a notice', E_USER_NOTICE)`
+        - `trigger_error('This is a warning', E_USER_WARNING)`
+- DEBUG: Check values on the fly. 
+    - print_r($arr)
+    - var_dump($foo), gives type, values, type of every element in array 
+    - PHP to console hack
+        ```php
+        function console_log($data){
+            echo '<script>';
+            echo 'console.log('.json_encode($data).')';
+            echo '</script>';
+        }
+        $foo = [0,1,2,3,4];
+        console_log($foo);
+        ```
+    - call `var_dump(debug_backtrace())` to know how you got there and dump of everything you encountered along the line.
+- ```php
+    try{
+        throw new Exception('Fatal Error!');
+    }
+    catch(Exception $e){
+		echo 'ERROR: '.$e->getFile().'(Line '.$e->getLine().'): '. $e->getMessage();
+	}
+  ```
+- Check php config settings: `phpinfo();`. You can see the error settings here too, can't edit though. We can pass in INFO_GENERAL, INFO_VARIABLES, INFO_CONFIGURATIONS etc to view specific parts of the info page.
 
 ### 5. Ruby On Rails
 - Ruby is a multi paradigm programming language with dynamic type system. Everything is considered as objects.

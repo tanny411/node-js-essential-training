@@ -15,6 +15,9 @@ This repo contains courses and exercises done to improve my full stack web devel
 	- [x] Other essential technologies:  Redis, Memcaced, Markdown, Sass, Task runners, Chrome dev tools
 - [ ] MERN Stack:
 	- [x] [React crash course](https://www.youtube.com/watch?v=sBws8MSXN7A&ab_channel=TraversyMedia)
-	- [ ] [Redux crash course](https://www.youtube.com/watch?v=93p3LxR9xfM&ab_channel=TraversyMedia)
+	- Redux:
+		- [ ] [Redux crash course](https://www.youtube.com/watch?v=93p3LxR9xfM&ab_channel=TraversyMedia)
+		- [x] [Redux analogy](https://www.youtube.com/watch?v=3sjMRS1gJys&ab_channel=StephenGrider)
+		- Other [link1](https://egghead.io/courses/getting-started-with-redux), [link2](https://ultimatecourses.com/blog/redux-typescript-store), [link3](https://blog.logrocket.com/react-redux-connect-when-and-how-to-use-it-f2a1edab2013/)
 	- [ ] [MERN Stack by traversy](https://www.youtube.com/playlist?list=PLillGF-RfqbbiTGgA77tGO426V3hRF9iE)
 - [ ] Udemy: MERN Stack front to back 

@@ -149,3 +149,94 @@
   - `$(( var1 + var2 ))` or `$(expr $var1 + $var2 )`
   - Hex to decimal, vice-versa, etc, we use the bash calculator (bc): `"obash=10; ibase=16; $hexVal" | bc`
 - `declare` command: Set variable `declare x` or also set value `declare x=10`. To make vars read only `declare -r myVar=something`
+- Arrays:
+  - Initialize by `arr=('var1' 'var2' 'var3')` and access by `${arr[0]}`
+  - Number of array elements `${#arr[@]}`, print whole array `${arr[@]}`
+  - Delete index `unset arr[2]` and list indices `${!arr[@]}`. Unsetting it removes that index from this list. Set new value `arr[2]='newVal'`
+- Functions:
+
+  ```bash
+  #! /bin/bash
+
+  function func()
+  {
+    echo "No param func"
+  }
+
+  # call function
+  func
+
+  function func2()
+  {
+    echo "arg1" $1 "arg2" $2
+  }
+
+  # call function
+  func2 "Hi" 90
+
+  ```
+
+- Directory and files:
+  - `mkdir -p dirName` to recreate if already exists.
+  - `if [ -d "$dirName" ]` check if directory exists. `-f` to check if file exists.
+  - To append (`>>`) or write anew (`>`) in file: `echo "$fileText" >> $fileName`
+  - Read from file. Here `IFS=` is same as `IFS=""`, is used for dealing with white spaces.
+    ```
+    while IFS= read -r line
+    do
+      echo "$line"
+    done < $fileName
+    ```
+- Send Emails: First install `sudo apt install ssmpt`. From google you have turn **on** the less secure apps access. Open `/etc/ssmtp/ssmtp.conf` and add the following. tls port is 587, ssl port is 465. Don't use your original email to do this, as you can see, less secure.
+  ```
+  root=your_mail_address
+  mailhub=smtp.gmail.com:587
+  AuthUser=your_mail_address
+  AuthPass=your_pass
+  UseSTARTTLS=yes
+  ```
+  From your script do `ssmpt your_mail_address` and running it will take input from std in. Write like
+  ```
+  To: to_mail@gmail.com
+  From: your_mail_address
+  Cc: someone@something.com
+  Subject: subject
+  This is body
+  ```
+  -Downloads
+  - Download file `curl $url -O` to keep downloaded file name or `curl $url -o newFileName` to give new name. You can also `curl $url > newFileName`.
+  - Download header abd check if file is okay. `curl -I $url`
+- Select statement: This gives a list of options and user can type in 1,2,3... to select any one of these options.
+  ```
+  select var in value1 value2 value3
+  do
+    echo "You have selected $var"
+  done
+  ```
+- Monitor files and directories: `sudo apt install inotify-tools` then in script `inotifywait -n your_file_or_dir`
+- Search text by `grep searchStr fileName`. Do `grep -i str file` to make it case insensitive. Use `-n` to show line numbers. `-c` gives you how many times the string appears. `-v` inverts the search. See `man grep` for more.
+- awk command
+
+  ```bash
+  awk '{print}' $fileName # prints the file
+  awk '/str/ {print}' $fileName # searches for 'str' in the file and prints those lines
+  awk '/str/ {print $1,$4}' $fileName # prints the 1st and 4th word of the lines that matched
+
+  ```
+
+- sed command
+
+  ```bash
+  cat $yourFile | sed 's/i/I/' # substitute(s) first i with I and cat it
+  sed 's/i/I' $yourFile # works same as above
+
+  cat $yourFile | sed 's/i/I/g' # substitute all i with I and cat it
+
+  sed 's/i/I/g' $yourFile > $modifiedFile
+  sed -i 's/i/I/g' $yourFile # modifies the same file
+  ```
+
+- Debugging bash script:
+  - Execute line by line by showing the code `bash -x ./myScript.sh`.
+  - Inside the script, in the first line `#! /bin/bash -x`
+  - Inside the script, start debugging here: `set -x`, end debugging here: `set +x`
